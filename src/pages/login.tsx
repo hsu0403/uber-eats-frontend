@@ -5,6 +5,8 @@ import { FrontLoginMutation, FrontLoginMutationVariables } from "../mytypes";
 import uberLogo from "../images/logo.svg";
 import { Button } from "../components/button";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { isLoggedInVar } from "../apollo";
 
 const LOGIN_MUTATION = gql`
   mutation FrontLoginMutation($loginInput: LogInInput!) {
@@ -16,7 +18,7 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-interface IForm {
+interface ILoginForm {
   email: string;
   password: string;
 }
@@ -26,7 +28,7 @@ export const Login = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<IForm>({
+  } = useForm<ILoginForm>({
     mode: "onChange",
   });
   const onCompleted = (data: FrontLoginMutation) => {
@@ -35,6 +37,7 @@ export const Login = () => {
     } = data;
     if (ok) {
       console.log(token);
+      isLoggedInVar(true);
     }
   };
   const [loginMutation, { loading, error, data: loginMutaionResult }] =
@@ -42,7 +45,7 @@ export const Login = () => {
       LOGIN_MUTATION,
       { onCompleted }
     );
-  const onSubmit: SubmitHandler<IForm> = (data) => {
+  const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     if (!loading) {
       const { email, password } = data;
       loginMutation({
@@ -57,13 +60,16 @@ export const Login = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Login | Uber-Eats</title>
+      </Helmet>
       <div className="h-screen flex items-center justify-center bg-gray-800">
         <div className="w-full max-w-screen-sm flex flex-col items-center">
           <div className="bg-white w-full max-w-lg py-8 rounded-md text-center">
             <img
               src={uberLogo}
               alt="ubereats-logo"
-              className="mx-auto pb-6 w-56"
+              className="mx-auto mb-6 w-56"
             />
             <form
               onSubmit={handleSubmit(onSubmit)}

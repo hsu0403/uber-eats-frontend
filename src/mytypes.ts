@@ -27,9 +27,44 @@ export interface FrontLoginMutationVariables {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL mutation operation: FrontCreateAccountMutation
+// ====================================================
+
+export interface FrontCreateAccountMutation_createAccount {
+  __typename: "CreateAccountOutput";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface FrontCreateAccountMutation {
+  createAccount: FrontCreateAccountMutation_createAccount;
+}
+
+export interface FrontCreateAccountMutationVariables {
+  createAccountInput: CreateAccountInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export enum UserRole {
+  Client = "Client",
+  Delivery = "Delivery",
+  Owner = "Owner",
+}
+
+export interface CreateAccountInput {
+  email: string;
+  password: string;
+  role: UserRole;
+}
 
 export interface LogInInput {
   email: string;
