@@ -50,6 +50,27 @@ export interface FrontCreateAccountMutationVariables {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL query operation: FrontMeQuery
+// ====================================================
+
+export interface FrontMeQuery_me {
+  __typename: "User";
+  id: number;
+  email: string;
+  role: UserRole;
+  emailVerified: boolean;
+}
+
+export interface FrontMeQuery {
+  me: FrontMeQuery_me;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================

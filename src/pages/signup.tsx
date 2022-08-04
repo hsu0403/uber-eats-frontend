@@ -4,7 +4,7 @@ import { FormError } from "../components/form-error";
 import uberLogo from "../images/logo.svg";
 import { Button } from "../components/button";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import {
   FrontCreateAccountMutation,
   FrontCreateAccountMutationVariables,
@@ -47,7 +47,7 @@ export const SignUp = () => {
       createAccount: { ok, error },
     } = data;
     if (ok) {
-      navigate("/login", { replace: true });
+      navigate("/", { replace: true });
     }
   };
 
@@ -147,7 +147,7 @@ export const SignUp = () => {
             </form>
             <div className="mt-4">
               Already have an account?{" "}
-              <Link className="text-red-500 hover:underline" to="/login">
+              <Link className="text-red-500 hover:underline" to="/">
                 Go to Login &rarr;
               </Link>
             </div>
