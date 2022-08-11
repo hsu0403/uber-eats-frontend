@@ -4,12 +4,12 @@ import { FormError } from "../components/form-error";
 import { FrontLoginMutation, FrontLoginMutationVariables } from "../mytypes";
 import uberLogo from "../images/logo.svg";
 import { Button } from "../components/button";
-import { Link } from "react-router-dom";
+import { Link, Location, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { authToken, isLoggedInVar } from "../apollo";
 import { LOCALSTORAGE_TOKEN } from "../constants";
 
-const LOGIN_MUTATION = gql`
+export const LOGIN_MUTATION = gql`
   mutation FrontLoginMutation($loginInput: LogInInput!) {
     logIn(input: $loginInput) {
       ok
@@ -24,13 +24,25 @@ interface ILoginForm {
   password: string;
 }
 
+interface ILocation {
+  email: string;
+  password: string;
+}
+
 export const Login = () => {
+  const location: Location = useLocation();
+  const state = location.state as ILocation;
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<ILoginForm>({
     mode: "onChange",
+    defaultValues: {
+      email: state ? state.email : "",
+      password: state ? state.password : "",
+    },
   });
   const onCompleted = (data: FrontLoginMutation) => {
     const {
@@ -85,7 +97,7 @@ export const Login = () => {
                     message: "Invalid email address",
                   },
                 })}
-                placeholder="Eamil"
+                placeholder="Email"
                 type="email"
                 name="email"
                 className="w-full py-3 px-5 rounded-md shadow-sm focus:outline-none border-2 focus:border-red-400 focus:border-opacity-70 transition-colors"

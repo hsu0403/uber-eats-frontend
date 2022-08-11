@@ -12,7 +12,7 @@ import {
 } from "../mytypes";
 import { useNavigate } from "react-router-dom";
 
-const CREATE_ACCOUNT_MUTATION = gql`
+export const CREATE_ACCOUNT_MUTATION = gql`
   mutation FrontCreateAccountMutation(
     $createAccountInput: CreateAccountInput!
   ) {
@@ -34,6 +34,7 @@ export const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    getValues,
   } = useForm<ICreateAccountForm>({
     mode: "onChange",
     defaultValues: {
@@ -47,7 +48,7 @@ export const SignUp = () => {
       createAccount: { ok, error },
     } = data;
     if (ok) {
-      navigate("/", { replace: true });
+      navigate("/", { replace: true, state: getValues() });
     }
   };
 
@@ -100,7 +101,7 @@ export const SignUp = () => {
                     message: "Invalid email address",
                   },
                 })}
-                placeholder="Eamil"
+                placeholder="Email"
                 type="email"
                 name="email"
                 className="w-full py-3 px-5 rounded-md shadow-sm focus:outline-none border-2 focus:border-red-400 focus:border-opacity-70 transition-colors"

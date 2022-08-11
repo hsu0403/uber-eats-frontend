@@ -25,6 +25,96 @@ export interface FrontMeQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: FrontFindCategory
+// ====================================================
+
+export interface FrontFindCategory_findCategory_restaurants_category {
+  __typename: "Category";
+  name: string;
+}
+
+export interface FrontFindCategory_findCategory_restaurants {
+  __typename: "Restaurant";
+  id: number;
+  name: string;
+  coverImg: string;
+  address: string;
+  isPromoted: boolean;
+  category: FrontFindCategory_findCategory_restaurants_category | null;
+}
+
+export interface FrontFindCategory_findCategory_category {
+  __typename: "Category";
+  id: number;
+  name: string;
+  iconImg: string | null;
+  slug: string;
+  restaurantCount: number;
+}
+
+export interface FrontFindCategory_findCategory {
+  __typename: "CategoryOutput";
+  ok: boolean;
+  error: string | null;
+  totalPages: number | null;
+  totalResults: number | null;
+  restaurants: FrontFindCategory_findCategory_restaurants[] | null;
+  category: FrontFindCategory_findCategory_category | null;
+}
+
+export interface FrontFindCategory {
+  findCategory: FrontFindCategory_findCategory;
+}
+
+export interface FrontFindCategoryVariables {
+  input: CategoryInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: FrontRestaurant
+// ====================================================
+
+export interface FrontRestaurant_restaurant_restaurant_category {
+  __typename: "Category";
+  name: string;
+}
+
+export interface FrontRestaurant_restaurant_restaurant {
+  __typename: "Restaurant";
+  id: number;
+  name: string;
+  coverImg: string;
+  address: string;
+  isPromoted: boolean;
+  category: FrontRestaurant_restaurant_restaurant_category | null;
+}
+
+export interface FrontRestaurant_restaurant {
+  __typename: "RestaurantOutput";
+  ok: boolean;
+  error: string | null;
+  restaurant: FrontRestaurant_restaurant_restaurant | null;
+}
+
+export interface FrontRestaurant {
+  restaurant: FrontRestaurant_restaurant;
+}
+
+export interface FrontRestaurantVariables {
+  input: RestaurantInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: FrontRestaurantsPageQuery
 // ====================================================
 
@@ -75,6 +165,47 @@ export interface FrontRestaurantsPageQuery {
 
 export interface FrontRestaurantsPageQueryVariables {
   input: RestaurantsInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: FrontSearchRestaurant
+// ====================================================
+
+export interface FrontSearchRestaurant_searchRestaurant_restaurants_category {
+  __typename: "Category";
+  name: string;
+}
+
+export interface FrontSearchRestaurant_searchRestaurant_restaurants {
+  __typename: "Restaurant";
+  id: number;
+  name: string;
+  coverImg: string;
+  address: string;
+  isPromoted: boolean;
+  category: FrontSearchRestaurant_searchRestaurant_restaurants_category | null;
+}
+
+export interface FrontSearchRestaurant_searchRestaurant {
+  __typename: "SearchRestaurantOutput";
+  ok: boolean;
+  error: string | null;
+  totalPages: number | null;
+  totalResults: number | null;
+  restaurants: FrontSearchRestaurant_searchRestaurant_restaurants[] | null;
+}
+
+export interface FrontSearchRestaurant {
+  searchRestaurant: FrontSearchRestaurant_searchRestaurant;
+}
+
+export interface FrontSearchRestaurantVariables {
+  input: SearchRestaurantInput;
 }
 
 /* tslint:disable */
@@ -176,6 +307,48 @@ export interface FrontEditProfileVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL fragment: RestaurantParts
+// ====================================================
+
+export interface RestaurantParts_category {
+  __typename: "Category";
+  name: string;
+}
+
+export interface RestaurantParts {
+  __typename: "Restaurant";
+  id: number;
+  name: string;
+  coverImg: string;
+  address: string;
+  isPromoted: boolean;
+  category: RestaurantParts_category | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: CategoryParts
+// ====================================================
+
+export interface CategoryParts {
+  __typename: "Category";
+  id: number;
+  name: string;
+  iconImg: string | null;
+  slug: string;
+  restaurantCount: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: VerifiedUser
 // ====================================================
 
@@ -214,6 +387,11 @@ export enum UserRole {
   Owner = "Owner",
 }
 
+export interface CategoryInput {
+  page?: number | null;
+  slug: string;
+}
+
 export interface CreateAccountInput {
   email: string;
   password: string;
@@ -230,8 +408,17 @@ export interface LogInInput {
   password: string;
 }
 
+export interface RestaurantInput {
+  restaurantId: number;
+}
+
 export interface RestaurantsInput {
   page?: number | null;
+}
+
+export interface SearchRestaurantInput {
+  page?: number | null;
+  query: string;
 }
 
 export interface VerifyEmailInput {
