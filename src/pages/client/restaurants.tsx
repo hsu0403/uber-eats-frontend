@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -58,11 +58,18 @@ export const Restaurants = () => {
     const { searchTerm } = getValues();
     navigate({ pathname: "/search", search: `?term=${searchTerm}` });
   };
+
   return (
     <div>
       <Helmet>
         <title>Home | Uber-Eats</title>
       </Helmet>
+      <Link
+        to="/orders"
+        className="transition-all absolute py-3 px-5 bg-red-500 hover:bg-red-600 mt-5 right-5 rounded-md text-white"
+      >
+        Go Orders
+      </Link>
       <form
         onSubmit={handleSubmit(onSearchSubmit)}
         className="bg-gray-800 w-full py-40 flex items-center justify-center"
@@ -70,7 +77,7 @@ export const Restaurants = () => {
         <input
           {...register("searchTerm", { required: true })}
           type="search"
-          className="w-5/12 py-3 px-5 rounded-md shadow-sm focus:outline-none border-2 focus:border-red-400 focus:border-opacity-70 transition-colors"
+          className="w-5/12 py-3 px-5 rounded-md shadow-sm focus:outline-none transition-colors"
           placeholder="Search Restaurant.."
         />
       </form>
@@ -80,7 +87,14 @@ export const Restaurants = () => {
             {data?.allCategories.categories?.map((category) => (
               <Link key={category.id} to={`/category/${category.slug}`}>
                 <div className="items-center flex flex-col cursor-pointer group">
-                  <div className="group-hover:bg-gray-100 w-16 h-16 rounded-full bg-[url('https://tb-static.uber.com/prod/web-eats-v2/categories/icons/Asian_CuisineCarousel@2x.png')] bg-no-repeat bg-cover" />
+                  <div
+                    style={{
+                      backgroundImage: `url(${category.iconImg})`,
+                    }}
+                    className={`group-hover:bg-gray-100 w-16 h-16 rounded-full bg-no-repeat bg-cover ${
+                      category.iconImg ? "" : "bg-gray-600"
+                    }`}
+                  />
                   <span className="mt-1 text-sm text-center font-semibold">
                     {category.slug}
                   </span>
