@@ -108,10 +108,15 @@ export const AddDish = () => {
         const formBody = new FormData();
         formBody.append("file", actualFile);
         const { url } = await (
-          await fetch("http://localhost:4001/uploads/", {
-            method: "POST",
-            body: formBody,
-          })
+          await fetch(
+            process.env.NODE_ENV === "production"
+              ? "https://hsuber-eats-backend.herokuapp.com/uploads/"
+              : "http://localhost:4001/uploads/",
+            {
+              method: "POST",
+              body: formBody,
+            }
+          )
         ).json();
         createDishMutation({
           variables: {

@@ -37,7 +37,7 @@ export const AddRestaurant = () => {
       createRestaurant: { ok, restaurantId },
     } = data;
     if (ok) {
-      const { address, categoryName, coverImg, name } = getValues();
+      const { address, categoryName, name } = getValues();
       setUploading(false);
       const queryResult = client.readQuery({ query: MY_RESTAURANTS_QUERY });
       client.writeQuery({
@@ -90,10 +90,15 @@ export const AddRestaurant = () => {
       const formBody = new FormData();
       formBody.append("file", actualFile);
       const { url } = await (
-        await fetch("http://localhost:4001/uploads/", {
-          method: "POST",
-          body: formBody,
-        })
+        await fetch(
+          process.env.NODE_ENV === "production"
+            ? "https://hsuber-eats-backend.herokuapp.com/uploads/"
+            : "http://localhost:4001/uploads/",
+          {
+            method: "POST",
+            body: formBody,
+          }
+        )
       ).json();
       setImgUrl(url);
       createRestaurantMutation({
