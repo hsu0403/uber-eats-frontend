@@ -17,16 +17,24 @@ export const isLoggedInVar = makeVar(Boolean(token));
 export const authToken = makeVar(token);
 
 const wsLink = new WebSocketLink(
-  new SubscriptionClient("ws://localhost:4001/graphql", {
-    reconnect: true,
-    connectionParams: {
-      "X-JWT": authToken() || "",
-    },
-  })
+  new SubscriptionClient(
+    process.env.NODE_ENV === "production"
+      ? "wss://hsuber-eats-backend.herokuapp.com/graphql"
+      : "ws://localhost:4001/graphql",
+    {
+      reconnect: true,
+      connectionParams: {
+        "X-JWT": authToken() || "",
+      },
+    }
+  )
 );
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4001/graphql",
+  uri:
+    process.env.NODE_ENV === "production"
+      ? "https://hsuber-eats-backend.herokuapp.com/graphql"
+      : "http://localhost:4001/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
