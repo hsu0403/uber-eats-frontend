@@ -1,46 +1,15 @@
-# Getting Started with Create React App
+# Uber-Eats-Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 진행
 
-## Available Scripts
+- owner, client, driver로 계정 생성.
+- owner가 레스토랑과 관련한것들 생성해줌.
+- client가 해당 레스토랑에 get order을 통해 주문 신청
+- 원하는 메뉴를 선택, 사이드 옵션을 원하면 그것도 선택 후 주문
+- 주문이 들어오면 owner는 accept로 받아 요리에 들어감
+- 요리가 완료되면 driver는 실시간으로 요리가 완료된 것들중에 선택해서 배달
+- driver가 배달완료하면 끝남.
 
-In the project directory, you can run:
+### 해결해야할 문제들
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- google map을 이용해서 driver에서 예상 경로를 보여주는데 우리나라는 google map을 이용해서 나타내지 못하는 지역임. 향후 우리나라에서 사용한다면 방식을 바꿔야함.
