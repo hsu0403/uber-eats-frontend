@@ -93,40 +93,40 @@ export const MyRestaurant = () => {
     }
   }, [id]);
 
-  useEffect(() => {
-    if (data) {
-      const newData:
-        | {
-            day: any;
-            total: number | null;
-          }[]
-        | undefined = data.myRestaurant.restaurant?.orders.map((order) => ({
-        total: order.total,
-        day: order.createdAt.slice(5, 10),
-      }));
-      newData?.sort((a, b): any => {
-        if (a.day > b.day) return 1;
-        if (a.day === b.day) return 0;
-        if (a.day < b.day) return -1;
-      });
-      let arr: IData[] = [];
-      newData?.forEach((i) => {
-        if (!arr.find((current) => current.day === i.day)) {
-          arr.push({ day: i.day, total: 0 });
-        }
-      });
-      arr.forEach((i) => {
-        newData?.forEach((j) => {
-          if (i.day === j.day) {
-            if (j.total) {
-              i.total += j.total;
-            }
-          }
-        });
-      });
-      setChartData(arr);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     const newData:
+  //       | {
+  //           day: any;
+  //           total: number | null;
+  //         }[]
+  //       | undefined = data.myRestaurant.restaurant?.orders.map((order) => ({
+  //       total: order.total,
+  //       day: order.createdAt.slice(5, 10),
+  //     }));
+  //     newData?.sort((a, b): any => {
+  //       if (a.day > b.day) return 1;
+  //       if (a.day === b.day) return 0;
+  //       if (a.day < b.day) return -1;
+  //     });
+  //     let arr: IData[] = [];
+  //     newData?.forEach((i) => {
+  //       if (!arr.find((current) => current.day === i.day)) {
+  //         arr.push({ day: i.day, total: 0 });
+  //       }
+  //     });
+  //     arr.forEach((i) => {
+  //       newData?.forEach((j) => {
+  //         if (i.day === j.day) {
+  //           if (j.total) {
+  //             i.total += j.total;
+  //           }
+  //         }
+  //       });
+  //     });
+  //     setChartData(arr);
+  //   }
+  // }, [data]);
 
   const onCompleted = (data: FrontCreatePayment) => {
     if (data.createPayment.ok) {
@@ -167,6 +167,7 @@ export const MyRestaurant = () => {
       });
     }
   }, [pendingOrdersData, navigate]);
+  console.log(data?.myRestaurant.restaurant);
   return (
     <div>
       <Helmet>
@@ -226,7 +227,7 @@ export const MyRestaurant = () => {
           </div>
         )}
       </div>
-      <div className="mt-20 mb-10">
+      {/* <div className="mt-20 mb-10">
         <h4 className="text-center text-2xl font-medium mb-5">{`${
           today.getMonth() + 1
         } Month Sales`}</h4>
@@ -258,7 +259,7 @@ export const MyRestaurant = () => {
             />
           </VictoryChart>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
